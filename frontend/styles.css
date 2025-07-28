@@ -1,0 +1,259 @@
+
+:root {
+  --verde-principal: #2E7D32;
+  --verde-hover: #4CAF50;
+  --fondo-general: #F4F6F3;
+  --fondo-tarjeta: #E0E0E0;
+  --fondo-input: #FFFFFF;
+  --texto-verde: #2E7D32;
+  --texto-secundario: #444444;
+  --icono-destacado: #A0B29C;
+}
+
+body {
+     font-family: sans-serif;
+     margin: 0;
+     padding: 2rem;
+     background-color: var(--fondo-general);
+}
+ .board {
+     display: flex;
+     gap: 1rem;
+     align-items: flex-start;
+     flex-grow: 1;
+     width: 100%;
+     height: 10vh;
+}
+ .column {
+     background-color: var(--fondo-input);
+     border-radius: 8px;
+     padding: 1rem;
+     width: 200px;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+     height: 100%;
+     width: 100%;
+     max-height: 100%;
+     overflow: auto;
+}
+ .column h2 {
+     font-size: 1.2rem;
+     margin: 0 0 1rem;
+}
+ .add-column {
+     display: flex;
+     align-items: end;
+     justify-content: end;
+     gap: 2vw;
+     height: 100px;
+     width: 200px;
+     border-radius: 8px;
+     color: var(--texto-secundario);
+     font-weight: bold;
+     cursor: pointer;
+     width: 100%;
+}
+ .layout{
+     display: flex;
+     flex-direction: column;
+     justify-content: space-around;
+     align-items: center;
+     flex-wrap: wrap;
+     height: 90vh;
+}
+ .boton-circular {
+     width: 60px;
+     height: 60px;
+     border-radius: 50%;
+     border: none;
+     background: linear-gradient(135deg, var(--verde-hover), var(--verde-principal));
+     color: var(--fondo-input);
+     font-size: 24px;
+     cursor: pointer;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     transition: transform 0.2s ease, box-shadow 0.2s ease;
+     box-sizing: border-box;
+}
+ .boton-circular:hover {
+     transform: scale(1.1);
+     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+ .boton-circular:active {
+     transform: scale(0.95);
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+ .boton-redondeado {
+     padding: 12px 24px;
+     border: none;
+     border-radius: 999px;
+    /* muy redondeado, tipo píldora */
+     background: linear-gradient(135deg, var(--verde-hover), var(--verde-principal));
+     color: var(--fondo-input);
+     font-size: 16px;
+     font-weight: bold;
+     cursor: pointer;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+     transition: background 0.3s ease, transform 0.2s ease;
+     box-sizing: border-box;
+}
+ .boton-redondeado:hover {
+     background: linear-gradient(135deg, var(--verde-hover), var(--verde-principal));
+     transform: translateY(-2px);
+}
+ .boton-redondeado:active {
+     transform: translateY(1px);
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+ .task-card {
+     background-color: var(--fondo-tarjeta);
+     border-radius: 10px;
+     padding: 1vi;
+     box-sizing: border-box;
+     width: 100%;
+}
+ .task-header {
+     background-color: var(--verde-principal);
+     color: var(--fondo-input);
+     padding: 10px;
+     border-radius: 10px 10px 0 0;
+     font-weight: bold;
+}
+ .task-body {
+     display: flex;
+     gap: 2vw;
+     margin-top: 10px;
+}
+ .task-info {
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+     flex: 1;
+}
+ .task-info input {
+     padding: 8px;
+     border: none;
+     border-radius: 8px;
+     text-align: center;
+     background-color: var(--fondo-input);
+     color: var(--verde-principal);
+     font-weight: 500;
+}
+ .task-desc {
+     flex: 2;
+     background-color: var(--fondo-input);
+     border-radius: 5px;
+     padding: 8px;
+     color: var(--verde-principal);
+     font-size: 14px;
+}
+ .task-footer {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-top: 10px;
+}
+ .task-actions {
+     display: flex;
+     gap: 8px;
+}
+ .task-actions button {
+     background: none;
+     border: none;
+     font-size: 18px;
+     cursor: pointer;
+}
+ .task-actions .star {
+     color: var(--icono-destacado);
+}
+ .task-actions .delete {
+     color: var(--texto-secundario);
+}
+ .task-send {
+     background-color: var(--fondo-tarjeta);
+     border: none;
+     border-radius: 50%;
+     width: 28px;
+     height: 28px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: var(--fondo-input);
+     font-size: 16px;
+     cursor: pointer;
+}
+ .tasks{
+     display: flex;
+     flex-direction: column;
+     gap: 1vh;
+}
+
+ .form-container {
+      background-color: var(--fondo-tarjeta);
+      border-radius: 10px;
+      width: 300px;
+      padding: 20px;
+    }
+
+ .form-container::backdrop {
+    backdrop-filter:blur(5px) brightness(0.5);
+    }
+
+dialog {
+    border: none;
+}
+
+    .form-header {
+      background-color: var(--verde-principal);
+      color: var(--fondo-input);
+      font-size: 24px;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px 10px 0 0;
+      margin: -20px -20px 20px -20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--verde-principal);
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      background-color: var(--fondo-input);
+      font-size: 14px;
+      color: var(--verde-principal);
+    }
+
+    textarea {
+      resize: none;
+      height: 60px;
+    }
+
+    .form-button {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .form-button button {
+      background-color: var(--verde-principal);
+      color: var(--fondo-input);
+      border: none;
+      padding: 8px 20px;
+      font-size: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .form-button button:hover {
+      background-color: var(--verde-hover);
+    }
