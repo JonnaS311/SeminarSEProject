@@ -109,6 +109,7 @@ body {
      padding: 1vi;
      box-sizing: border-box;
      width: 100%;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
  .task-header {
      background-color: var(--verde-principal);
@@ -162,13 +163,31 @@ body {
      cursor: pointer;
 }
  .task-actions .star {
-     color: var(--icono-destacado);
+    color: var(--texto-secundario);
+    background-color: var(--verde-principal);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh;
 }
  .task-actions .delete {
-     color: var(--texto-secundario);
+    color: var(--texto-secundario);
+    background-color: var(--verde-principal);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh;
+}
+.delete:hover{
+    background-color: var(--verde-hover);
+}
+.star:hover{
+    background-color: var(--verde-hover);
 }
  .task-send {
-     background-color: var(--fondo-tarjeta);
+     background-color: var(--verde-principal);
      border: none;
      border-radius: 50%;
      width: 28px;
@@ -179,6 +198,9 @@ body {
      color: var(--fondo-input);
      font-size: 16px;
      cursor: pointer;
+}
+.task-send:hover {
+  background-color: var(--verde-hover);
 }
  .tasks{
      display: flex;
@@ -257,3 +279,26 @@ dialog {
     .form-button button:hover {
       background-color: var(--verde-hover);
     }
+    /* Scrollbar general */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Fondo del track */
+::-webkit-scrollbar-track {
+  background: var(--fondo-general);
+  border-radius: 10px;
+}
+
+/* Barra que se desplaza */
+::-webkit-scrollbar-thumb {
+  background-color: var(--verde-principal);
+  border-radius: 10px;
+  border: 2px solid var(--fondo-general); /* efecto de separación */
+}
+
+/* Al hacer hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--verde-hover);
+}

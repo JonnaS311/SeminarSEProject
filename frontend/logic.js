@@ -75,8 +75,8 @@ function crearTareaNodo(id, title, date, description, assignee) {
     </div>
     <div class="task-footer">
       <div class="task-actions">
-        <button class="star">★</button>
-        <button class="delete" onclick="eliminarTarea('${div.id}')">🗑️</button>
+        <button class="star"><img src="./static/del.svg" alt="Descripción de la imagen SVG" width="16" height="16"></button>
+        <button class="delete" onclick="eliminarTarea('${div.id}')"><img src="./static/star.svg" alt="Descripción de la imagen SVG" width="16" height="16"></button>
       </div>
       <button class="task-send" onclick="moverTarea('${div.id}')">➔</button>
     </div>
