@@ -1,9 +1,14 @@
+"""Unit Testing for backend functions."""
+# third-party
 from datetime import date
-from src.task import Task
 import pytest
+
+# local imports
+from src.task import Task
 
 
 def test_task_model_valid():
+    """Test to validate correct format model."""
     task = Task(
         title="Tarea 1",
         description="Descripción de prueba",
@@ -19,6 +24,7 @@ def test_task_model_valid():
 
 
 def test_task_model_invalid_date():
+    """Test to validate a invalid date."""
     with pytest.raises(ValueError):
         Task(
             title="Tarea 2",
@@ -33,6 +39,7 @@ def test_task_model_invalid_date():
 
 
 def test_task_model_long_description():
+    """Test to valide a long description."""
     long_text = "a" * 10_000  # Descripción extremadamente larga
     task = Task(
         title="Título",
@@ -48,6 +55,7 @@ def test_task_model_long_description():
 
 
 def test_task_model_invalid_color():
+    """Test to validate a invalid color."""
     task = Task(
         title="Color raro",
         description="",
@@ -58,5 +66,5 @@ def test_task_model_invalid_color():
         color="no-es-un-color",  # No es un hex válido
         manager_id=1
     )
-    # El modelo lo acepta, pero podrías validarlo manualmente
+    # El modelo lo acepta
     assert isinstance(task.color, str)

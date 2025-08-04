@@ -1,0 +1,20 @@
+[MASTER]
+init-hook='import sys; sys.path.append("src")'
+ignore=venv
+jobs=1
+
+[REPORTS]
+output-format = colorized
+reports=no
+score=yes
+
+[BASIC]
+good-names=i,j,k,ex,Run,_,pk,id
+variable-rgx=[a-z_][a-z0-9_]{1,30}$
+const-rgx=([A-Z_][A-Z0-9_]*)|(__.*__)$
+
+[TYPECHECK]
+ignored-modules=locust
+
+[FORMAT]
+max-line-length=100

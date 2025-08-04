@@ -1,8 +1,11 @@
-from datetime import datetime
+"""it's just the API. Contain the endpoints."""
+# third-party
 from fastapi import FastAPI
-from task import Task
-from task_DAO import TaskDAO
 from fastapi.middleware.cors import CORSMiddleware
+
+# local imports
+from task import Task
+from task_dao import TaskDAO
 
 app = FastAPI()
 dao = TaskDAO()
@@ -25,35 +28,41 @@ app.add_middleware(
 
 @app.get("/getAllTask")
 def get_all_task():
+    """Obtein all tasks from a user."""
     tasks = dao.read_all()
     return tasks
 
 
 @app.get('/getTask/{task_id}')
 def get_task(task_id: int):
+    """Obtein one task from a user."""
     return dao.find_by_id(task_id)
 
 
 @app.post('/createTask')
 def create_task(task: Task):
+    """Create and insert one task from a user."""
     task = dao.create(task)
     return task
 
 
 @app.delete('/deleteTask/{task_id}')
 def delete_task(task_id: int):
+    """Delete one task from a user."""
     dao.delete(task_id)
 
 
 @app.put('/changePriorityTask/{task_id}')
-def priority_task(task_id: int):
-    Task = dao.find_by_id(task_id)
-    Task.priority = not Task.priority
+def change_priority_task(task_id: int):
+    """Update the priority applying a 'not' operation."""
+    task = dao.find_by_id(task_id)
+    task.priority = not task.priority
     dao.update(Task)
 
 
 @app.put('/changeStateTask/{state}/{id_task}')
 def state_task(state: str, id_task: int):
+    """Update the state of one task from a user."""
     task = dao.find_by_id(id_task)
     task.state = state
     dao.update(task)
@@ -61,10 +70,11 @@ def state_task(state: str, id_task: int):
 
 @app.get('/getByPriority/{column}')
 def get_priority(column: str):
+    """Obtein all tasks from a column arranged by priority."""
     tasks = dao.read_all()
     column_task = [ts for ts in tasks if ts.state == column]
-    priority_task = list()
-    no_priority_task = list()
+    priority_task = []
+    no_priority_task = []
     for ts in column_task:
         if ts.priority:
             priority_task.append(ts)
@@ -76,6 +86,7 @@ def get_priority(column: str):
 
 @app.get('/getByDate/{column}')
 def get_date(column: str):
+    """Obtein all tasks from a column arranged by date."""
     tasks = dao.read_all()
     column_task = [ts for ts in tasks if ts.state == column]
     tasks_arranged = sorted(column_task, key=lambda x: x.date, reverse=True)

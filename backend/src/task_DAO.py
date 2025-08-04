@@ -1,8 +1,10 @@
+"""Data access object for Tasks."""
 from db_connection import DatabaseConnection
 from task import Task
 
 
 class TaskDAO:
+    """Class DAO for tasks."""
     columns = ["task_id", "title", "description", "date",
                "state", "priority", "assignee", "color", "manager_id"]
 
@@ -11,6 +13,7 @@ class TaskDAO:
         self.db.connect()
 
     def create(self, task: Task) -> Task:
+        """Insert a task using query."""
         query = """
         INSERT INTO Task (Title, Description, Date, State, Priority, Assignee, Color, Manager_ID)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
@@ -26,11 +29,13 @@ class TaskDAO:
         return task
 
     def read_all(self):
+        """Select all task using query."""
         self.db.cursor.execute("SELECT * FROM Task")
         rows = self.db.cursor.fetchall()
         return [Task(**dict(zip(self.columns, row))) for row in rows]
 
     def find_by_id(self, task_id):
+        """Select one task using query."""
         self.db.cursor.execute(
             "SELECT * FROM Task WHERE Task_ID = %s", (task_id,))
         row = self.db.cursor.fetchone()
@@ -40,6 +45,7 @@ class TaskDAO:
         return Task(**data) if data else None
 
     def update(self, task: Task):
+        """Update parcial or completely one task using a query."""
         query = """
         UPDATE Task SET
             Title = %s,
@@ -60,10 +66,11 @@ class TaskDAO:
         self.db.connection.commit()
 
     def delete(self, task_id: int):
-        print(task_id)
+        """Delete one task using a query."""
         self.db.cursor.execute(
             "DELETE FROM Task WHERE Task_ID = %s", (task_id,))
         self.db.connection.commit()
 
     def close(self):
+        """Close connection."""
         self.db.close()

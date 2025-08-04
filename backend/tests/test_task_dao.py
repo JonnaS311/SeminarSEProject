@@ -1,12 +1,17 @@
-import pytest
+"""Unit Testing for backend functions using a Mock DAO."""
+# third-party
 from unittest.mock import MagicMock
-from src.task import Task
-from src.task_DAO import TaskDAO
 from datetime import date
+import pytest
+
+# local imports
+from src.task import Task
+from src.task_dao import TaskDAO
 
 
 @pytest.fixture
-def mock_dao():
+def mock_task_dao():
+    """Mock the DAO."""
     dao = TaskDAO()
     dao.db = MagicMock()
     dao.db.cursor = MagicMock()
@@ -15,6 +20,7 @@ def mock_dao():
 
 
 def test_create_task(mock_dao):
+    """Test create a task successfully."""
     mock_dao.db.cursor.fetchone.return_value = [1]
     task = Task(
         title="Nueva",
@@ -33,6 +39,7 @@ def test_create_task(mock_dao):
 
 
 def test_find_by_id(mock_dao):
+    """Test find a task successfully.."""
     fake_row = (1, "Title", "Desc", date.today(),
                 "done", False, "User", "#fff", 1)
     mock_dao.db.cursor.fetchone.return_value = fake_row

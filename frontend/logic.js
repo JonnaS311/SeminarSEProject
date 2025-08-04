@@ -36,16 +36,35 @@ function moverTarea(id) {
 }
 
 function eliminarTarea(id) {
-    console.log("here")
-    const tarea = document.getElementById(id);
-    fetch(`http://127.0.0.1:8000/deleteTask/${id}`, {
-        method: 'DELETE'
-    }).then((data)=>{
-        if (!data.ok) {
-             throw new Error('Error en la respuesta: ' + response.status);
-        }
-        tarea.parentNode.removeChild(tarea)
-    })
+    Notiflix.Confirm.show('Delete task',
+        'Do you want delete this task?',
+        'Yes',
+        'No',
+        () => {
+            const tarea = document.getElementById(id);
+            fetch(`http://127.0.0.1:8000/deleteTask/${id}`, {
+                method: 'DELETE'
+            }).then((data)=>{
+                if (!data.ok) {
+                    throw new Error('Error en la respuesta: ' + response.status);
+                }
+                tarea.parentNode.removeChild(tarea)
+                Toastify({
+                    text: "Task deleted successfully",
+                    className: "info",
+                    gravity: "top",
+                    close: true,
+                    style: {
+                        background: "linear-gradient(135deg, var(--verde-hover), var(--verde-principal))",
+                        'border-radius': "2rem"
+                    }
+                    }).showToast();
+            })
+        },
+        () => {
+            
+        },
+    );
 }
 
 function updateTask(id) {
