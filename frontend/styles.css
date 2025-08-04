@@ -15,6 +15,9 @@ body {
      margin: 0;
      padding: 2rem;
      background-color: var(--fondo-general);
+     user-select: none;
+     -webkit-user-select: none; /* para Safari */
+     -ms-user-select: none;     /* para IE */
 }
  .board {
      display: flex;
@@ -110,6 +113,7 @@ body {
      box-sizing: border-box;
      width: 100%;
      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+     z-index: 10;
 }
  .task-header {
      background-color: var(--verde-principal);
@@ -206,6 +210,8 @@ body {
      display: flex;
      flex-direction: column;
      gap: 1vh;
+     height: 100%;
+     width: 100%;
 }
 
  .form-container {
@@ -330,4 +336,11 @@ dialog {
     align-items: center;
     justify-content: center;
     padding: 1vh;
+}
+
+.task-card.dragging {
+  z-index: 9999 !important;
+  position: absolute !important;
+  pointer-events: none; /* evita interferencias mientras se mueve */
+  width: 30%;
 }

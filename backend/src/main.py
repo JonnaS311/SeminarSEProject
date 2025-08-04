@@ -52,8 +52,10 @@ def priority_task(task_id: int):
     dao.update(Task)
 
 
-@app.put('/changeStateTask')
-def state_task(task: Task):
+@app.put('/changeStateTask/{state}/{id_task}')
+def state_task(state: str, id_task: int):
+    task = dao.find_by_id(id_task)
+    task.state = state
     dao.update(task)
 
 

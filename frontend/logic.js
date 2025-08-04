@@ -2,17 +2,9 @@ function moverTarea(id) {
     const tarea = document.getElementById(id);
     const doing = document.getElementById("doing");
     const done = document.getElementById("done");
-    fetch(`http://127.0.0.1:8000/getTask/${id}`).then((response) => {
-        if (!response.ok) {
-            throw new Error('Error en la respuesta: ' + response.status);
-        }
-        return response.json()
-
-    }).then((task) => {
-        if (tarea && doing && done) {
+    if (tarea && doing && done) {
             if (tarea.parentNode.parentNode.id === 'todo') {
-                task.state = 'doing'
-                fetch('http://127.0.0.1:8000/changeStateTask', {
+                fetch(`http://127.0.0.1:8000/changeStateTask/doing/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -22,12 +14,11 @@ function moverTarea(id) {
                     if (!response.ok) {
                         throw new Error('Error en la respuesta: ' + response.status);
                     }
-                    doing.appendChild(tarea);
+                    doing.childNodes[3].appendChild(tarea);
                 })
 
             } else {
-                task.state = 'done'
-                fetch('http://127.0.0.1:8000/changeStateTask', {
+                fetch(`http://127.0.0.1:8000/changeStateTask/done/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -37,13 +28,11 @@ function moverTarea(id) {
                     if (!response.ok) {
                         throw new Error('Error en la respuesta: ' + response.status);
                     }
-                    done.appendChild(tarea); // Mueve el div
+                    done.childNodes[3].appendChild(tarea); // Mueve el div
                 })
 
             }
         }
-
-    })
 }
 
 function eliminarTarea(id) {
@@ -259,3 +248,93 @@ function byDate(name) {
         
     })
 }
+
+interact('.task-card').draggable({
+  listeners: {
+    start (event) {
+      const task = event.target;
+      task.classList.add('dragging');
+
+      // Guardar posición inicial
+      const rect = task.getBoundingClientRect();
+      task.dataset.startLeft = rect.left;
+      task.dataset.startTop = rect.top;
+      task.dataset.originalParent = event.target.parentNode.parentNode.id
+
+      // Mover al body
+      document.body.appendChild(task);
+
+      // Posicionarlo absolutamente donde estaba
+      Object.assign(task.style, {
+        left: `${rect.left}px`,
+        top: `${rect.top}px`,
+        width: `${rect.width}px`,
+        height: `${rect.height}px`
+      });
+    },
+
+    move (event) {
+      const task = event.target;
+      const x = (parseFloat(task.getAttribute('data-x')) || 0) + event.dx;
+      const y = (parseFloat(task.getAttribute('data-y')) || 0) + event.dy;
+
+      task.style.transform = `translate(${x}px, ${y}px)`;
+      task.setAttribute('data-x', x);
+      task.setAttribute('data-y', y);
+    },
+
+    end (event) {
+      const task = event.target;
+
+      // Si no fue aceptada en dropzone, devolver al original
+      const droppedInTasks = task.parentElement.classList.contains('tasks');
+
+      if (!droppedInTasks) {
+        const originalParent = document.getElementById(task.dataset.originalParent);
+        if (originalParent) {
+            originalParent.appendChild(task);
+        } else {
+            console.warn('No se encontró el contenedor original para la tarea:', task);
+        }
+      }
+
+      // Reset transform y z-index
+      task.style.transform = '';
+      task.removeAttribute('data-x');
+      task.removeAttribute('data-y');
+      task.classList.remove('dragging');
+
+      // Aquí se reposiciona automáticamente en la dropzone por interact
+    }
+  }
+});
+
+interact('.tasks').dropzone({
+  accept: '.task-card',
+  overlap: 0.5,
+  async ondrop(event) {
+    const task = event.relatedTarget;
+    const targetColumn = event.target;
+
+    // Eliminar estilos de posición y tamaño
+    task.style.position = '';
+    task.style.left = '';
+    task.style.top = '';
+    task.style.width = '';
+    task.style.height = '';
+    task.style.zIndex = '';
+    task.style.transform = '';
+    task.removeAttribute('data-x');
+    task.removeAttribute('data-y');
+
+    task.classList.remove('dragging');
+
+    const newState = targetColumn.closest('.column').id;
+    const response = await fetch(`http://127.0.0.1:8000/changeStateTask/${newState}/${task.id}`,{
+                method: 'PUT'})
+
+    if (response.ok) {
+        targetColumn.appendChild(task)
+    }
+  }
+});
