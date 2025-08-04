@@ -57,7 +57,7 @@ def change_priority_task(task_id: int):
     """Update the priority applying a 'not' operation."""
     task = dao.find_by_id(task_id)
     task.priority = not task.priority
-    dao.update(Task)
+    dao.update(task)
 
 
 @app.put('/changeStateTask/{state}/{id_task}')
