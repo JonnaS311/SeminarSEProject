@@ -302,3 +302,32 @@ dialog {
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--verde-hover);
 }
+
+.row{
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  justify-content:start ;
+  align-items: center;
+}
+
+ .task-actions .priority {
+    color: var(--texto-secundario);
+    background-color: var(--texto-secundario);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh;
+}
+
+ .task-actions .priority:hover {
+    color: var(--texto-secundario);
+    background-color: var(--verde-hover);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh;
+}

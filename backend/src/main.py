@@ -1,3 +1,4 @@
+from datetime import datetime
 from fastapi import FastAPI
 from task import Task
 from task_DAO import TaskDAO
@@ -44,11 +45,36 @@ def delete_task(task_id: int):
     dao.delete(task_id)
 
 
-@app.put('/changePriorityTask')
-def priority_task(task: Task):
+@app.put('/changePriorityTask/{task_id}')
+def priority_task(task_id: int):
+    Task = dao.find_by_id(task_id)
+    Task.priority = not Task.priority
     dao.update(Task)
 
 
 @app.put('/changeStateTask')
 def state_task(task: Task):
     dao.update(task)
+
+
+@app.get('/getByPriority/{column}')
+def get_priority(column: str):
+    tasks = dao.read_all()
+    column_task = [ts for ts in tasks if ts.state == column]
+    priority_task = list()
+    no_priority_task = list()
+    for ts in column_task:
+        if ts.priority:
+            priority_task.append(ts)
+            continue
+        no_priority_task.append(ts)
+    priority_task.extend(no_priority_task)
+    return priority_task
+
+
+@app.get('/getByDate/{column}')
+def get_date(column: str):
+    tasks = dao.read_all()
+    column_task = [ts for ts in tasks if ts.state == column]
+    tasks_arranged = sorted(column_task, key=lambda x: x.date, reverse=True)
+    return tasks_arranged
