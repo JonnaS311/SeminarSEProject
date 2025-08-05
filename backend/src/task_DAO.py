@@ -41,7 +41,10 @@ class TaskDAO:
         row = self.db.cursor.fetchone()
 
         # convertir la tupla en un dict
-        data = dict(zip(self.columns, row))
+        if row is not None:
+            data = dict(zip(self.columns, row))
+        else:
+            data = None
         return Task(**data) if data else None
 
     def update(self, task: Task):

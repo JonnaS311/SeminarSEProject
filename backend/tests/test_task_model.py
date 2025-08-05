@@ -1,6 +1,7 @@
 """Unit Testing for backend functions."""
 # third-party
 from datetime import date
+from pydantic import ValidationError
 import pytest
 
 # local imports
@@ -56,15 +57,50 @@ def test_task_model_long_description():
 
 def test_task_model_invalid_color():
     """Test to validate a invalid color."""
-    task = Task(
-        title="Color raro",
-        description="",
-        date=date.today(),
-        state="todo",
-        priority=True,
-        assignee="user",
-        color="no-es-un-color",  # No es un hex válido
-        manager_id=1
-    )
-    # El modelo lo acepta
-    assert isinstance(task.color, str)
+    with pytest.raises(ValidationError) as exc_info:
+        task = Task(
+            title="Color raro",
+            description="",
+            date=date.today(),
+            state="todo",
+            priority=True,
+            assignee="user",
+            color="no-es-un-color",
+            manager_id=1
+        )
+    # El modelo NO lo acepta
+    assert "color" in str(exc_info.value)
+
+
+def test_task_model_invalid_state():
+    """Test to validate a invalid state."""
+    with pytest.raises(ValidationError) as exc_info:
+        task = Task(
+            title="Color raro",
+            description="",
+            date=date.today(),
+            state="here go a invalid state",
+            priority=True,
+            assignee="user",
+            color="no-es-un-color",
+            manager_id=1
+        )
+    # El modelo NO lo acepta
+    assert "state" in str(exc_info.value)
+
+
+def test_task_model_invalid_manager():
+    """Test to validate a invalid manager id."""
+    with pytest.raises(ValidationError) as exc_info:
+        task = Task(
+            title="Color raro",
+            description="",
+            date=date.today(),
+            state="here go a invalid state",
+            priority=True,
+            assignee="user",
+            color="no-es-un-color",
+            manager_id=-1
+        )
+    # El modelo NO lo acepta
+    assert "manager_id" in str(exc_info.value)

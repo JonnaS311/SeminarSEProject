@@ -1,4 +1,5 @@
 """Locust test suite for backend performance and stress testing."""
+import random
 from locust import HttpUser, task, between
 
 
@@ -25,3 +26,9 @@ class MyUser(HttpUser):
             "manager_id": 1
         }
         self.client.post("/createTask", json=payload)
+
+    @task
+    def modify_state(self):
+        """Testing the endpoint getAllTask."""
+        self.client.put(
+            f"/changeStateTask/todo/1")

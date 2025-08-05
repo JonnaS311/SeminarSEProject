@@ -50,19 +50,16 @@ def test_get_task_by_id():
 
 def test_update_priority():
     """Change priority and wait a 200 status code."""
-    updated = test_task.copy()
-    updated["task_id"] = task_context["id"]
-    updated["priority"] = False
-    response = client.put("/changePriorityTask", json=updated)
+    task_id = task_context["id"]
+    response = client.put(f"/changePriorityTask/{task_id}")
     assert response.status_code in (200, 204)
 
 
 def test_update_state():
     """Change one task and wait a 200 status code."""
-    updated = test_task.copy()
-    updated["task_id"] = task_context["id"]
-    updated["state"] = "done"
-    response = client.put("/changeStateTask", json=updated)
+    task_id = task_context["id"]
+    task_state = "done"
+    response = client.put(f"/changeStateTask/{task_state}/{task_id}")
     assert response.status_code in (200, 204)
 
 
