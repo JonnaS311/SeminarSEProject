@@ -68,22 +68,68 @@ PUT /changeStateTask/{state}/{id_task} – Change the state of a task
 ## 📁 Project structure
 
 ```nginx
-Seminar project/
-│
-├── backend/
-│ ├── pyproject.toml # Poetry configuration and dependencies
-│ ├── src/
-│ │ └── main.py # Main FastAPI server code
-│ └── README.md # Internal documentation
-│
-├── frontend/
-│ ├── index.html # Main interface
-│ ├── style.css # Custom styles
-│ └── logic.js # Backend interaction logic
-│
-├── DB_DDL.sql # PostgreSQL table creation script
-├── Inserts.sql # Sample data
-└── .gitignore
+Seminar project
+├─ backend
+│  ├─ .pylintrc
+│  ├─ .pytest_cache
+│  │  ├─ CACHEDIR.TAG
+│  │  ├─ README.md
+│  │  └─ v
+│  │     └─ cache
+│  │        ├─ lastfailed
+│  │        └─ nodeids
+│  ├─ locust
+│  │  ├─ locustfile.py
+│  │  ├─ __init__.py
+│  │  └─ __pycache__
+│  │     ├─ locustfile.cpython-312.pyc
+│  │     └─ locust_file.cpython-312.pyc
+│  ├─ poetry.lock
+│  ├─ pyproject.toml
+│  ├─ pytest.ini
+│  ├─ README.md
+│  ├─ src
+│  │  ├─ db_connection.py
+│  │  ├─ main.py
+│  │  ├─ task.py
+│  │  ├─ task_dao.py
+│  │  ├─ __init__.py
+│  │  └─ __pycache__
+│  │     ├─ db_connection.cpython-312.pyc
+│  │     ├─ main.cpython-312.pyc
+│  │     ├─ task.cpython-312.pyc
+│  │     ├─ task_dao.cpython-312.pyc
+│  │     └─ __init__.cpython-312.pyc
+│  └─ tests
+│     ├─ test_endpoints.py
+│     ├─ test_task_dao.py
+│     ├─ test_task_model.py
+│     ├─ __init__.py
+│     └─ __pycache__
+│        ├─ test_endpoints.cpython-312-pytest-8.4.1.pyc
+│        ├─ test_task_dao.cpython-312-pytest-8.4.1.pyc
+│        ├─ test_task_model.cpython-312-pytest-8.4.1.pyc
+│        └─ __init__.cpython-312.pyc
+├─ DB_DDL.sql
+├─ frontend
+│  ├─ eslint.config.mjs
+│  ├─ Index.html
+│  ├─ package-lock.json
+│  ├─ package.json
+│  ├─ server.js
+│  └─ static
+│     ├─ images
+│     │  ├─ del.svg
+│     │  └─ star.svg
+│     ├─ scripts
+│     │  ├─ api.js
+│     │  ├─ dom.js
+│     │  ├─ dragdrop.js
+│     │  ├─ events.js
+│     │  └─ main.js
+│     └─ styles
+│        └─ styles.css
+└─ Inserts.sql
 ```
 
 ## 🧪 Tests
