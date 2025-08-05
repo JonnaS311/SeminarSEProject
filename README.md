@@ -71,19 +71,9 @@ PUT /changeStateTask/{state}/{id_task} – Change the state of a task
 Seminar project
 ├─ backend
 │  ├─ .pylintrc
-│  ├─ .pytest_cache
-│  │  ├─ CACHEDIR.TAG
-│  │  ├─ README.md
-│  │  └─ v
-│  │     └─ cache
-│  │        ├─ lastfailed
-│  │        └─ nodeids
 │  ├─ locust
 │  │  ├─ locustfile.py
-│  │  ├─ __init__.py
-│  │  └─ __pycache__
-│  │     ├─ locustfile.cpython-312.pyc
-│  │     └─ locust_file.cpython-312.pyc
+│  │  └─ __init__.py
 │  ├─ poetry.lock
 │  ├─ pyproject.toml
 │  ├─ pytest.ini
@@ -93,23 +83,12 @@ Seminar project
 │  │  ├─ main.py
 │  │  ├─ task.py
 │  │  ├─ task_dao.py
-│  │  ├─ __init__.py
-│  │  └─ __pycache__
-│  │     ├─ db_connection.cpython-312.pyc
-│  │     ├─ main.cpython-312.pyc
-│  │     ├─ task.cpython-312.pyc
-│  │     ├─ task_dao.cpython-312.pyc
-│  │     └─ __init__.cpython-312.pyc
+│  │  └─ __init__.py
 │  └─ tests
 │     ├─ test_endpoints.py
 │     ├─ test_task_dao.py
 │     ├─ test_task_model.py
-│     ├─ __init__.py
-│     └─ __pycache__
-│        ├─ test_endpoints.cpython-312-pytest-8.4.1.pyc
-│        ├─ test_task_dao.cpython-312-pytest-8.4.1.pyc
-│        ├─ test_task_model.cpython-312-pytest-8.4.1.pyc
-│        └─ __init__.cpython-312.pyc
+│     └─ __init__.py
 ├─ DB_DDL.sql
 ├─ frontend
 │  ├─ eslint.config.mjs
@@ -129,7 +108,9 @@ Seminar project
 │     │  └─ main.js
 │     └─ styles
 │        └─ styles.css
-└─ Inserts.sql
+├─ Inserts.sql
+└─ README.md
+
 ```
 
 ## 🧪 Tests
