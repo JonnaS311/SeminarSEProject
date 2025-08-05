@@ -1,4 +1,4 @@
-# SeminarSIProject
+# SeminarSEProject
 
 Task management system developed as part of a seminar project, including a Python backend and a web frontend.
 
