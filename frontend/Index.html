@@ -5,15 +5,23 @@
       <title>Kanban Board</title>
       <link rel="stylesheet" href="./static/styles/styles.css">
       <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
    </head>
    <body>
+      <nav class="nav">
+         <h1>TaskFlowBoard</h1>
+         <a href="https://github.com/JonnaS311/SeminarSIProject"><i class="fa-brands fa-github"></i></a>
+      </nav>
       <div class="layout">
          <div class="board">
             <div class="column" id="todo">
                <div class="row">
-                  <h2>To Do</h2>
-                  <button class="boton-redondeado" onclick="byPriority('todo')">priority</button>
-                  <button class="boton-redondeado" onclick="byDate('todo')">date</button>
+                  <strong>To Do</strong>
+                  <div class="border"><button class="boton-redondeado" onclick="byPriority('todo')">priority</button></div>
+                  <div class="border"><button class="boton-redondeado" onclick="byDate('todo')">date</button></div>
                </div>
                <div class="tasks">
 
@@ -21,9 +29,9 @@
             </div>
             <div class="column" id="doing">
                 <div class="row">
-                  <h2>Doing</h2>
-                  <button class="boton-redondeado" onclick="byPriority('doing')">priority</button>
-                  <button class="boton-redondeado" onclick="byDate('doing')">date</button>
+                  <strong>Doing</strong>
+                  <div class="border"><button class="boton-redondeado" onclick="filterBy('priority','doing')">priority</button></div>
+                  <div class="border"><button class="boton-redondeado" onclick="filterBy('date','doing')">date</button></div>
                </div>
                <div class="tasks">
 
@@ -31,9 +39,9 @@
             </div>
             <div class="column" id="done">
                 <div class="row">
-                  <h2>Done</h2>
-                  <button class="boton-redondeado" onclick="byPriority('done')">priority</button>
-                  <button class="boton-redondeado" onclick="byDate('done')">date</button>
+                  <strong>Done</strong>
+                  <div class="border"><button class="boton-redondeado" onclick="byPriority('done')">priority</button></div>
+                  <div class="border"><button class="boton-redondeado" onclick="byDate('done')">date</button></div>
                </div>
                <div class="tasks">
 
@@ -46,7 +54,11 @@
       </div>
 
 <dialog class="form-container" id="formu" >
-   <div class="form-header">Add new Task <button onclick="formu.close()"> x </button></div>
+   <div class="form-header">
+      <h2>Add new Task</h2> 
+      <div class="border"><button onclick="formu.close()" class="boton-redondeado close"> <i class="fa-solid fa-xmark"></i> </button></div>
+   </div>
+   <div class="form-body">
     <form method="dialog" id="form">
     <div class="form-group">
       <label for="title">Tittle</label>
@@ -66,12 +78,15 @@
     </div>
     <div class="form-group">
       <label for="color">Color</label>
-      <input type="color" id="color" name="color">
+      <input type="color" id="color" name="color" value="#4CAF50">
     </div>
-    <div class="form-button">
-      <button type="submit">Add</button>
+    <div class="form-left">
+    <div class="border form-button">
+      <button class="boton-redondeado" type="submit">Add</button>
+    </div>
     </div>
     </form>
+    </div>
   </dialog>
       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
       <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
