@@ -19,8 +19,8 @@ def mock_task_dao():
     return dao
 
 
-def test_create_task(mock_task_dao):
-    """Test create a task successfully."""
+def test_create_task(mock_task_dao):  # pylint: disable=redefined-outer-name
+    """Test creating a task successfully."""
     mock_task_dao.db.cursor.fetchone.return_value = [1]
     task = Task(
         title="Nueva",
@@ -38,8 +38,8 @@ def test_create_task(mock_task_dao):
     mock_task_dao.db.connection.commit.assert_called_once()
 
 
-def test_find_by_id(mock_task_dao):
-    """Test find a task successfully.."""
+def test_find_by_id(mock_task_dao):  # pylint: disable=redefined-outer-name
+    """Test finding a task successfully."""
     fake_row = (1, "Title", "Desc", date.today(),
                 "done", False, "User", "#fff", 1)
     mock_task_dao.db.cursor.fetchone.return_value = fake_row

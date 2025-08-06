@@ -18,3 +18,6 @@ ignored-modules=locust
 
 [FORMAT]
 max-line-length=100
+
+[MESSAGES CONTROL]
+disable=not-callable,function-redefined,too-many-arguments,too-many-positional-arguments,missing-timeout

@@ -1,6 +1,6 @@
 """it's just the API. Contain the endpoints."""
 # third-party
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 # local imports
@@ -36,7 +36,10 @@ def get_all_task():
 @app.get('/getTask/{task_id}')
 def get_task(task_id: int):
     """Obtein one task from a user."""
-    return dao.find_by_id(task_id)
+    task = dao.find_by_id(task_id)
+    if task is None:
+        raise HTTPException(status_code=404, detail="Tarea no encontrada")
+    return task
 
 
 @app.post('/createTask')

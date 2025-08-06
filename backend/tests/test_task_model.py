@@ -58,7 +58,7 @@ def test_task_model_long_description():
 def test_task_model_invalid_color():
     """Test to validate a invalid color."""
     with pytest.raises(ValidationError) as exc_info:
-        task = Task(
+        _ = Task(
             title="Color raro",
             description="",
             date=date.today(),
@@ -75,7 +75,7 @@ def test_task_model_invalid_color():
 def test_task_model_invalid_state():
     """Test to validate a invalid state."""
     with pytest.raises(ValidationError) as exc_info:
-        task = Task(
+        _ = Task(
             title="Color raro",
             description="",
             date=date.today(),
@@ -92,7 +92,7 @@ def test_task_model_invalid_state():
 def test_task_model_invalid_manager():
     """Test to validate a invalid manager id."""
     with pytest.raises(ValidationError) as exc_info:
-        task = Task(
+        _ = Task(
             title="Color raro",
             description="",
             date=date.today(),

@@ -74,5 +74,4 @@ def test_get_deleted_task():
     """Get a deleted task and verify if it's None."""
     task_id = task_context["id"]
     response = client.get(f"/getTask/{task_id}")
-    assert response.status_code == 200
-    assert response.json() is None or response.json() == {}
+    assert response.status_code == 404
