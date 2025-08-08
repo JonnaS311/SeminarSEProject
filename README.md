@@ -68,7 +68,6 @@ PUT /changeStateTask/{state}/{id_task} – Change the state of a task
 ## 📁 Project structure
 
 ```nginx
-```
 Seminar project
 ├─ backend
 │  ├─ .pylintrc
@@ -119,8 +118,6 @@ Seminar project
 │        └─ styles.css
 ├─ Inserts.sql
 └─ README.md
-
-```
 ```
 
 ## 🧪 Tests
