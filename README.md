@@ -68,9 +68,18 @@ PUT /changeStateTask/{state}/{id_task} – Change the state of a task
 ## 📁 Project structure
 
 ```nginx
+```
 Seminar project
 ├─ backend
 │  ├─ .pylintrc
+│  ├─ features
+│  │  ├─ add_task.feature
+│  │  ├─ change_state.feature
+│  │  ├─ delete_task.feature
+│  │  └─ steps
+│  │     ├─ add_steps.py
+│  │     ├─ change_state_steps.py
+│  │     └─ delete_steps.py
 │  ├─ locust
 │  │  ├─ locustfile.py
 │  │  └─ __init__.py
@@ -111,6 +120,7 @@ Seminar project
 ├─ Inserts.sql
 └─ README.md
 
+```
 ```
 
 ## 🧪 Tests
